@@ -1,0 +1,20 @@
+VM WAREインストール。
+
+１．
+VM WARE Playerで検索。　MAC用はVM ware fusion。 無料で使用可能。
+
+検索したのでURL乗せときます。
+https://my.vmware.com/jp/web/vmware/info/slug/desktop_end_user_computing/vmware_fusion/11_0
+
+2.
+ISOイメージをDL。 2GBくらいあります。
+https://www.raspberrypi.org/downloads/raspberry-pi-desktop/
+
+3.
+VMでisoイメージを使用。
+使ってるOSがわからない旨のダイアログが出るので、新規VM生成時に Linux とDebian7 を指定する。
+HDDのサイズは20GBあれば十分かと。
+
+4.
+VMの再生でデスクトップが起動します。　電源断の際にはsuspendするほうが起動が早いです。
+
