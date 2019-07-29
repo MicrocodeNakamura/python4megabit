@@ -13,11 +13,11 @@ import time
 from turtle import *
 from freegames import square, vector
 
-p1xy = vector(-100, 0)
+p1xy = vector(-100, -50)
 p1aim = vector(4, 0)
 p1body = set()
 
-p2xy = vector(100, 0)
+p2xy = vector(100, 50)
 p2aim = vector(-4, 0)
 p2body = set()
 
@@ -26,6 +26,8 @@ def inside(head):
     return -200 < head.x < 200 and -200 < head.y < 200
 
 p1handle = 0
+sleepTime = 100
+subTime   = 0
 
 def p1Left():
     global p1handle
@@ -42,6 +44,9 @@ def p1Right():
         p1aim.rotate(-90)
 
 def draw():
+    global sleepTime
+    global subTime
+
     "Advance players and draw game."
     p1xy.move(p1aim)
     p1head = p1xy.copy()
@@ -49,13 +54,14 @@ def draw():
     p2xy.move(p2aim)
     p2head = p2xy.copy()
 
-    if not inside(p1head) or p1head in p2body:
+    # change to p1 , hit check on p1 self.
+    if not inside(p1head) or p1head in p2body or p1head in p1body:
         print('Player blue wins!')
         time.sleep(5)
         sys.exit(0)
 #        return
 
-    if not inside(p2head) or p2head in p1body:
+    if not inside(p2head) or p2head in p1body or p2head in p2body:
         print('Player red wins!')
         time.sleep(5)
         sys.exit(0)
@@ -67,8 +73,17 @@ def draw():
     square(p1xy.x, p1xy.y, 3, 'red')
     square(p2xy.x, p2xy.y, 3, 'blue')
     update()
-    ontimer(draw, 100)
-#    ontimer(draw, 50)
+
+    # include players speed. Change game barance here.
+    ontimer(draw, sleepTime)
+#    ontimer(draw, 100)
+    # Todo change level up time and curve.
+    subTime += sleepTime
+#    if subTime > (sleepTime):
+    if subTime > (10000):
+        subTime = 0
+        sleepTime -=  10
+        print ("Speed up" + str ( sleepTime ) )
 
 setup(420, 420, 370, 0)
 hideturtle()

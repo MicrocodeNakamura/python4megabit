@@ -50,7 +50,7 @@ pygame.mixer.set_num_channels(6)
 
 # ---- BACKGROUND IMAGES ---- #
 tetris_img = pygame.image.load('images/Tetris.jpg')
-grid_img = pygame.image.load('images/gridbg.jpg')
+grid_img = pygame.image.load('images/gridBG.jpg')
 
 intro_screen = pygame.image.load('images/Intro.jpg')
 outro_screen = pygame.image.load('images/Outro.jpg')
