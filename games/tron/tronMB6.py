@@ -44,10 +44,6 @@ class playerContainer:
             self.aim.rotate(-90)
 
 # main program. 
-<<<<<<< HEAD
-=======
-
->>>>>>> 508f1c8e590ef82ac96a22e042fa94d9ef18c95d
 # 入力を受け付けるキーデータの種類
 
 # パラメータの初期化処理。 プレイヤーの数は、以下の行の数で決定することができる。
@@ -58,17 +54,10 @@ players = []
 #--------------------------------------------------------------------------------------------------------------
 players.append ( playerContainer ( 'player1', 'orange' , vector(-160,  180), vector(  4, 0 ) ,'Left', 'Right' ) )
 players.append ( playerContainer ( 'player2', 'red'    , vector(-160,  120), vector(  4, 0 ) ,'1'   , '2'     ) )
-<<<<<<< HEAD
-players.append ( playerContainer ( 'player3', 'purple' , vector(-160,   60), vector(  4, 0 ) ,'4'   , '5'     ) )
-players.append ( playerContainer ( 'player4', 'green'  , vector(160,   -60), vector( -4, 0 ) ,'7'   , '8'     ) )
-players.append ( playerContainer ( 'player5', 'blue'   , vector(160,  -120), vector( -4, 0 ) ,'q'   , 'w'     ) )
-players.append ( playerContainer ( 'player6', 'aqua'   , vector(160,  -180), vector( -4, 0 ) ,'r'   , 't'     ) )
-=======
 #players.append ( playerContainer ( 'player3', 'purple' , vector(-160,   60), vector(  4, 0 ) ,'4'   , '5'     ) )
 #players.append ( playerContainer ( 'player4', 'green'  , vector(160,   -60), vector( -4, 0 ) ,'7'   , '8'     ) )
 #players.append ( playerContainer ( 'player5', 'blue'   , vector(160,  -120), vector( -4, 0 ) ,'q'   , 'w'     ) )
 #players.append ( playerContainer ( 'player6', 'aqua'   , vector(160,  -180), vector( -4, 0 ) ,'r'   , 't'     ) )
->>>>>>> 508f1c8e590ef82ac96a22e042fa94d9ef18c95d
 
 def inside(head):
     "Return True if head inside screen."
