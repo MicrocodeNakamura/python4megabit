@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-"""
-Tron, classic arcade game.
-=======
 """Tron, classic arcade game.
->>>>>>> 508f1c8e590ef82ac96a22e042fa94d9ef18c95d
 
 Exercises
 
