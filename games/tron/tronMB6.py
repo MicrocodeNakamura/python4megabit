@@ -50,10 +50,10 @@ players = []
 #--------------------------------------------------------------------------------------------------------------
 players.append ( playerContainer ( 'player1', 'orange' , vector(-160,  180), vector(  4, 0 ) ,'Left', 'Right' ) )
 players.append ( playerContainer ( 'player2', 'red'    , vector(-160,  120), vector(  4, 0 ) ,'1'   , '2'     ) )
-players.append ( playerContainer ( 'player3', 'purple' , vector(-160,   60), vector(  4, 0 ) ,'4'   , '5'     ) )
-players.append ( playerContainer ( 'player4', 'green'  , vector(160,   -60), vector( -4, 0 ) ,'7'   , '8'     ) )
-players.append ( playerContainer ( 'player5', 'blue'   , vector(160,  -120), vector( -4, 0 ) ,'q'   , 'w'     ) )
-players.append ( playerContainer ( 'player6', 'aqua'   , vector(160,  -180), vector( -4, 0 ) ,'r'   , 't'     ) )
+#players.append ( playerContainer ( 'player3', 'purple' , vector(-160,   60), vector(  4, 0 ) ,'4'   , '5'     ) )
+#players.append ( playerContainer ( 'player4', 'green'  , vector(160,   -60), vector( -4, 0 ) ,'7'   , '8'     ) )
+#players.append ( playerContainer ( 'player5', 'blue'   , vector(160,  -120), vector( -4, 0 ) ,'q'   , 'w'     ) )
+#players.append ( playerContainer ( 'player6', 'aqua'   , vector(160,  -180), vector( -4, 0 ) ,'r'   , 't'     ) )
 
 def inside(head):
     "Return True if head inside screen."
