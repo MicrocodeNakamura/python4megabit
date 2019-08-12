@@ -1,4 +1,5 @@
-"""Tron, classic arcade game.
+"""
+Tron, classic arcade game.
 
 Exercises
 
@@ -39,7 +40,6 @@ class playerContainer:
             self.aim.rotate(-90)
 
 # main program. 
-
 # 入力を受け付けるキーデータの種類
 
 # パラメータの初期化処理。 プレイヤーの数は、以下の行の数で決定することができる。
