@@ -103,6 +103,14 @@ class Cluster(object):
         for block in other.blocks:
             self.blocks.append(block)
 
+    def clear(self):
+        self.col = col
+        self.row = row
+        self.clr = 0
+        self.blocks = [Block()] * blocksNo
+        self._colOffsets = [0] * blocksNo
+        self._rowOffsets = [0] * blocksNo
+
 
 # -------------------------------------- #
 
