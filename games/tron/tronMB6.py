@@ -34,12 +34,13 @@ class playerContainer:
 
     def pnLeft( self ):
         self.handle -= 1
-        if ( self.handle <= -6 ):
-            self.handle += 6
-            self.aim.rotate(90)
+        if ( self.handle <= -2 ):
+            self.handle += 2
+            self.aim.rotate(30)
 
     def pnRight( self ):
         self.handle += 1
+
         if ( self.handle >= 6 ):
             self.handle -= 6
             self.aim.rotate(-90)
