@@ -1,0 +1,4 @@
+mkdocsを簡易WEBサーバーで確認するためのコマンド。
+python3 -m mkdocs serve -a "localhost:80"
+
+

@@ -201,7 +201,7 @@ while True:
 
             if event.type == pygame.KEYDOWN:
     #            if event.key == pygame.K_SPACE:
-                if (event.key == pygame.K_SPACE) or (event.key == pygame.K_o):
+                if (event.key == pygame.K_SPACE) or (event.key == pygame.K_9):
                     inPlay = True
                     hasPlayed = True
 
@@ -278,7 +278,8 @@ while True:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_8:
                     # ボタン押下時のダイアル誤動作抑止のために、２カウントで移動する判定
-                    if ( previous_key == pygame.K_8 ):
+#                    if ( previous_key == pygame.K_8 ):
+                    if True:
                         previous_key = 0
                         shape.rotateClkwise()
                         shape._rotate()
@@ -293,7 +294,8 @@ while True:
 
                 if event.key == pygame.K_7:
                     # ボタン押下時のダイアル誤動作抑止のために、２カウントで移動する判定
-                    if ( previous_key == pygame.K_7 ):
+#                    if ( previous_key == pygame.K_7 ):
+                    if ( True ):
                         previous_key = 0
                         shape.rotateCntclkwise()
                         shape._rotate()
@@ -322,7 +324,7 @@ while True:
 
     #            if event.key == pygame.K_DOWN:
     #            if event.key == pygame.K_SPACE:
-                if event.key == pygame.K_o:
+                if event.key == pygame.K_9:
                     shape.move_down()
                     if shape.collides(floor) or shape.collides(obstacles):
                         # 接地後時間経過判定

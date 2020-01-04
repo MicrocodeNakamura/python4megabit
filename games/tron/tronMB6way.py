@@ -15,10 +15,8 @@ import time
 from turtle import *
 from freegames import square, vector
 
-levelup = True
-
 class playerContainer:
-    def __init__(self, name, color, xy_vect, aim_vect, left_k, right_k, push_k ):
+    def __init__(self, name, color, xy_vect, aim_vect, left_k, right_k ):
         self.name = name
         self.color = color
         self.xy = xy_vect
@@ -26,31 +24,22 @@ class playerContainer:
         self.body = set ()
         self.handle = 0
         self.head = vector(0, 0)
+        self.previousHead = vector(0, 0)
         self.leftkey = left_k
         self.rightkey = right_k
-        self.pushkey = push_k
         self.alive = True
-        self.speedup = True
 
     def pnLeft( self ):
-        self.handle -= 1
-        if ( self.handle <= -6 ):
-            self.handle += 6
-            self.aim.rotate(90)
+#        self.handle -= 1
+#        if ( self.handle <= -6 ):
+#            self.handle += 6
+        self.aim.rotate(15)
 
     def pnRight( self ):
-        self.handle += 1
-        if ( self.handle >= 6 ):
-            self.handle -= 6
-            self.aim.rotate(-90)
-    
-    # speed up!
-    def pnPush( self ):
-        global levelup
-        if self.alive and self.speedup:
-            levelup = True
-            self.speedup = False
-#            time.sleep(2)
+#        self.handle += 1
+#        if ( self.handle >= 6 ):
+#            self.handle -= 6
+        self.aim.rotate(-15)
 
 # main program. 
 # 入力を受け付けるキーデータの種類
@@ -61,16 +50,17 @@ class playerContainer:
 players = []
 #                                  name       body color       inital pos    initial dir      leftkey rightley
 #--------------------------------------------------------------------------------------------------------------
-#players.append ( playerContainer ( 'player1', 'orange' , vector(-160,  180), vector(  4, 0 ) ,'Left', 'Right' ) )
+players.append ( playerContainer ( 'player1', 'orange' , vector(-160,  180), vector(  4, 0 ) ,'Left', 'Right' ) )
 #players.append ( playerContainer ( 'player2', 'red'    , vector(-160,  120), vector(  4, 0 ) ,'1'   , '2'     ) )
-players.append ( playerContainer ( 'player3', 'purple' , vector(-160,   60), vector(  4, 0 ) ,'4'   , '5' ,'6'    ) )
-players.append ( playerContainer ( 'player4', 'green'  , vector(160,   -60), vector( -4, 0 ) ,'7'   , '8' ,'9'    ) )
-players.append ( playerContainer ( 'player5', 'blue'   , vector(160,  -120), vector( -4, 0 ) ,'q'   , 'w' ,'e'    ) )
-players.append ( playerContainer ( 'player6', 'aqua'   , vector(160,  -180), vector( -4, 0 ) ,'r'   , 't' ,'y'    ) )
+#players.append ( playerContainer ( 'player3', 'purple' , vector(-160,   60), vector(  4, 0 ) ,'4'   , '5'     ) )
+#players.append ( playerContainer ( 'player4', 'green'  , vector(160,   -60), vector( -4, 0 ) ,'7'   , '8'     ) )
+#players.append ( playerContainer ( 'player4', 'green'  , vector(160,   -60), vector( -4, 0 ) ,'a'   , 'd'     ) )
+#players.append ( playerContainer ( 'player5', 'blue'   , vector(160,  -120), vector( -4, 0 ) ,'q'   , 'w'     ) )
+#players.append ( playerContainer ( 'player6', 'aqua'   , vector(160,  -180), vector( -4, 0 ) ,'r'   , 't'     ) )
 
 def inside(head):
     "Return True if head inside screen."
-    return -200 < head.x < 200 and -200 < head.y < 200
+    return -500 < head.x < 500 and -350 < head.y < 350
 
 p1handle = 0
 sleepTime = 100
@@ -87,49 +77,39 @@ def draw():
     global sleepTime
     global subTime
     global stringPen
-    global levelup
 
 # 6 players の動作を描画し判定する
     "Advance players and draw game."
     for player in players:
-        if player.alive == True:
-            player.xy.move(player.aim)
-            player.head = player.xy.copy()
+        player.xy.move(player.aim)
+        player.head = player.xy.copy()
+
+        # 記憶用の座標を3の倍数に成形
+        player.head = vector( int( player.head.x ) - ( int( player.head.x ) % 3) ,\
+             int( player.head.y ) - ( int( player.head.y ) % 3) )
 
     # change to p1 , hit check on p1 self.
-    alive_ct = 0
     for player in players:
-        if player.alive == True:
+        if player.previousHead != player.head:
+            player.previousHead = player.head
             if not inside(player.head) or hitcheck( player ):
                 stringPen.clear()
                 stringPen.write( 'Player ' + player.color + ' lose!', False, 'center', ('Alial', 14, 'normal' ) )
                 print('Player ' + player.color + ' lose!')
-                square(player.xy.x, player.xy.y, 3, 'Black' )
+                square(player.xy.x, player.xy.y, 5, 'Black' )
                 update()
-                player.alive = False
-            else:
-                alive_ct += 1
-    if alive_ct == 1:
-        stringPen.write( 'Game set!', False, 'right', ('Alial', 14, 'normal' ) )
-        print('Game set!')
-        time.sleep(5)
-        sys.exit(0)
-    elif ( alive_ct == 0):
-        stringPen.write( 'Draw game!', False, 'right', ('Alial', 14, 'normal' ) )
-        print('Draw game!')
-        time.sleep(5)
-        sys.exit(0)
-
-    #            time.sleep(5)
-            # sys.exit(0)
+                
+                time.sleep(5)
+                sys.exit(0)
+        else:
+            print ("same previous")
     # hit したらそのPlayerのライフフラグを折る。 （game over） TODO
     #        return
 
     for player in players:
-        if player.alive:
-            player.body.add( player.head )
-            square(player.xy.x, player.xy.y, 3, player.color )
-#        square(player.xy.x, player.xy.y, 4, player.color )
+        player.body.add( player.head )
+#        square(player.xy.x, player.xy.y, 3, player.color )
+        square(player.head.x, player.head.y, 5, player.color )
 
     update()
 
@@ -139,19 +119,16 @@ def draw():
     # Todo change level up time and curve.
     subTime += sleepTime
 #    if subTime > (sleepTime):
-#    if subTime > (10000):
-    if subTime > (6000) or levelup == True:
-        if levelup == True:
-            time.sleep(0.5)
+    if subTime > (10000):
         subTime = 0
         sleepTime -=  10
-        levelup = False
         print ("Speed up" + str ( sleepTime ) )
 
 
 stringPen = Turtle()
 stringPen.hideturtle()
-setup(420, 420, 370, 0)
+# setup(420, 420, 370, 0)
+setup(1040, 740, 50, 0)
 hideturtle()
 stringPen.write("hello")
 tracer(False)
@@ -160,26 +137,20 @@ listen()
 if len( players) > 0:
     onkey(lambda: players[0].pnLeft(),  players[0].leftkey )
     onkey(lambda: players[0].pnRight(), players[0].rightkey )
-    onkey(lambda: players[0].pnPush(),  players[0].pushkey )
 if len( players) > 1:
     onkey(lambda: players[1].pnLeft(),  players[1].leftkey )
     onkey(lambda: players[1].pnRight(), players[1].rightkey )
-    onkey(lambda: players[1].pnPush(),  players[1].pushkey )
 if len( players) > 2:
     onkey(lambda: players[2].pnLeft(),  players[2].leftkey )
     onkey(lambda: players[2].pnRight(), players[2].rightkey )
-    onkey(lambda: players[2].pnPush(),  players[2].pushkey )
 if len( players) > 3:
     onkey(lambda: players[3].pnLeft(),  players[3].leftkey )
     onkey(lambda: players[3].pnRight(), players[3].rightkey )
-    onkey(lambda: players[3].pnPush(),  players[3].pushkey )
 if len( players) > 4:
     onkey(lambda: players[4].pnLeft(),  players[4].leftkey )
     onkey(lambda: players[4].pnRight(), players[4].rightkey )
-    onkey(lambda: players[4].pnPush(),  players[4].pushkey )
 if len( players) > 5:
     onkey(lambda: players[5].pnLeft(),  players[5].leftkey )
     onkey(lambda: players[5].pnRight(), players[5].rightkey )
-    onkey(lambda: players[5].pnPush(),  players[5].pushkey )
 draw()
 done()
