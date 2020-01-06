@@ -45,3 +45,33 @@ Operator --> (キャッチボックス) : << 景品セット >>
 (CPUボード) ..> (モーションアクチュエータ) : << モーション停止信号 >>
 (CPUボード) ..> (景品獲得表示器) : << 表示信号 >>
 @enduml
+
+@startuml
+
+
+package "キャッチボックス" {
+    frame "ロック機構" {
+        [ロックセンサ] as locksense  
+        [ロックアクチュエータ] as lockact        
+    }
+    [ルアーセンサ] as luresense
+}
+
+package "CPUボード" {
+    [IOポート] as cpuio
+    [サウンドポート] as cpusound
+}  
+
+[モーションアクチュエータ] as motionact
+[景品獲得表示器] as prizeinfo
+
+Lure <.. luresense : ルアーの投入/排出チェック
+Lure <.. locksense : ルアーのロックチェック
+Lure <-- lockact : ルアーを機械的にロック
+
+cpuio --> motionact : キャッチボックスを駆動
+cpuio --> prizeinfo : 景品獲得を示唆
+cpuio <-- luresense : ルアー投入/排出通知
+cpuio <-- locksense : ルアーロック通知
+
+@enduml
